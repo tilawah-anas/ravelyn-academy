@@ -1,0 +1,31 @@
+/* RAVELYN DESIGN RULES */
+
+/* Typography */
+2 font families /* DM Serif Display + Inter */
+3 font weights max /* 400, 500, 700 */
+
+/* Font sizes */
+12 / 14 / 16 / 20 / 24 / 32 / 40 / 48 / 64px
+
+/* Spacing */
+4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80px
+
+/* Radius */
+8px
+999px
+
+/* Animation */
+150–250ms
+Subtle
+Same behaviour across components
+
+/* Layout */
+Consistent section padding
+Consistent container width
+Generous whitespace
+
+/* Colour */
+Primary → attention
+Neutral → supporting content
+Muted → secondary information
+Accent → use sparingly

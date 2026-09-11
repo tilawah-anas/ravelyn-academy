@@ -1,0 +1,85 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "DM Serif Display", serif;
+  src: url(fonts/DMSerifDisplay-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Inter", sans-serif;
+  src: url(fonts/Inter-VariableFont_opsz\,wght.ttf);
+}
+
+:root {
+  --font-heading: "DM Serif Display", serif;
+  --font-body: "Inter", sans-serif;
+  --navy: #14213D; /* headings, primary buttons, footer, navbar*/
+  --gold: #C9A227; /* emphasis */
+  --ivory: #F8F6F0; /* main bg */
+  --white: #FFFFFF; /* main bg, surfaces */
+  --text: #242424; /* body text */
+  --muted: #6B7280; /* footer text or secondary text */
+  --radius-sm: 8px;
+  --radius-pill: 999px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  padding-left: 80px;
+  padding-right: 80px;
+  background-color: var(--navy);
+  position: fixed;
+  width: 100%;
+  border-bottom: 1px solid var(--gold);
+  font-family: var(--font-body);
+
+  .nav-left {
+    color: var(--white);
+    margin-left: 7px;
+  }
+
+  .nav-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--white);
+    transition: 0.3s;
+  }
+
+  a:hover {
+    color: var(--gold);
+  }
+
+  .nav-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  button {
+    border: 1px solid var(--gold);
+    padding: 7px;
+    border-radius: var(--radius-pill);
+    background-color: transparent;
+    color: var(--white);
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    background-color: var(--gold);
+    color: var(--navy);
+  }
+}
