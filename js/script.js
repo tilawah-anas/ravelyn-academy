@@ -11,30 +11,25 @@ const submitButton = document.getElementById("submitBtn");
 
 contactForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-    const fullName = username.value.trim()
-    const email = useremail.value.trim()
-    const subject = usersubject.value.trim()
-    const message = usermessage.value.trim()
   const payload = {
-    fullName,
-    email,
-    subject,
-    message
+    fullName: username.value.trim(),
+    email: useremail.value.trim(),
+    subject: usersubject.value.trim(),
+    message: usermessage.value.trim()
   };
 
-  console.log(payload)
+  // console.log(payload)
 
   try {
     const response = await api('/contact', {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
       body: JSON.stringify(payload),
     });
 
-    console.log(response)
+    // console.log(response)
   } catch (error) {
     alert(error.message);
+  } finally {
+    contactForm.reset()
   }
 });

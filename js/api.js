@@ -2,7 +2,10 @@ const url = "https://sms.tunnelto.me/api";
 
 const api = async function(endpoint, options ={}) {
   try {
-    const response = await fetch(`${url}${endpoint}`, {...options});
+    const headers = {
+      "Content-Type": "application/json", ...(options.headers || {})
+    }
+    const response = await fetch(`${url}${endpoint}`, {...options, headers});
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
