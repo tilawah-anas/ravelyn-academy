@@ -2,28 +2,27 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* outline: 1px solid; */
 }
 
 @font-face {
-  font-family: "DM Serif Display", serif;
-  src: url(fonts/DMSerifDisplay-Regular.ttf);
+  font-family: "DM Serif Display";
+  src: url("../fonts/DMSerifDisplay-Regular.ttf");
 }
 
 @font-face {
-  font-family: "Inter", sans-serif;
-  src: url(fonts/Inter-VariableFont_opsz\,wght.ttf);
+  font-family: "Inter";
+  src: url("../fonts/Inter-VariableFont_opsz,wght.ttf");
 }
 
 :root {
   --font-heading: "DM Serif Display", serif;
   --font-body: "Inter", sans-serif;
-  --navy: #14213d; /* headings, primary buttons, footer, navbar*/
-  --gold: #c9a227; /* emphasis */
-  --ivory: #f8f6f0; /* main bg */
-  --white: #ffffff; /* main bg, surfaces */
-  --text: #242424; /* body text */
-  --muted: #6b7280; /* footer text or secondary text */
+  --navy: #14213d;
+  --gold: #c9a227;
+  --ivory: #f8f6f0;
+  --white: #ffffff;
+  --text: #242424;
+  --muted: #6b7280;
   --radius-sm: 8px;
   --radius-pill: 999px;
 }
@@ -91,7 +90,240 @@
   }
 }
 
+/* ADMISSIONS HERO */
+.admissions-hero {
+  margin-top: 50px;
+  padding: 120px 80px 100px;
+  background-color: var(--ivory);
+}
 
+.admissions-hero-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  h3 {
+    color: var(--navy);
+    font-family: var(--font-body);
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    color: var(--navy);
+    font-family: var(--font-heading);
+    font-size: 50px;
+    font-weight: 400;
+    width: 60%;
+    line-height: 1.1;
+    margin-bottom: 25px;
+  }
+
+  p {
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-size: 15px;
+    width: 55%;
+    line-height: 1.6;
+  }
+}
+
+/* ADMISSIONS PROCESS */
+.admissions-process {
+  padding: 100px 80px;
+  background-color: var(--white);
+}
+
+.admissions-process-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 60px;
+
+  h3 {
+    color: var(--navy);
+    font-family: var(--font-body);
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  h2 {
+    color: var(--navy);
+    font-family: var(--font-heading);
+    font-size: 40px;
+    font-weight: 400;
+    margin-bottom: 15px;
+  }
+
+  p {
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    width: 55%;
+  }
+}
+
+.admissions-process-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.admissions-process-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 30px;
+  padding: 30px 0;
+  border-top: 1px solid var(--gold);
+
+  span {
+    color: var(--gold);
+    font-family: var(--font-body);
+    font-size: 14px;
+  }
+
+  h2 {
+    color: var(--navy);
+    font-family: var(--font-heading);
+    font-size: 30px;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    width: 70%;
+  }
+}
+
+.admissions-process-item:last-child {
+  border-bottom: 1px solid var(--gold);
+}
+
+/* REQUIREMENTS */
+.admissions-requirements {
+  padding: 100px 80px;
+  background-color: var(--ivory);
+}
+
+.admissions-requirements-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  h3 {
+    color: var(--navy);
+    font-family: var(--font-body);
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    color: var(--navy);
+    font-family: var(--font-heading);
+    font-size: 40px;
+    font-weight: 400;
+    margin-bottom: 15px;
+  }
+
+  > p {
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    width: 60%;
+    margin-bottom: 40px;
+  }
+}
+
+.requirements-list {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+
+  > div {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--navy);
+  }
+
+  span {
+    color: var(--gold);
+    font-family: var(--font-body);
+    font-size: 14px;
+  }
+
+  p {
+    color: var(--navy);
+    font-family: var(--font-body);
+    font-size: 14px;
+  }
+}
+
+.requirements-list > div:first-child {
+  border-top: 1px solid var(--navy);
+}
+
+/* APPLICATION */
+.application {
+  padding: 100px 80px;
+  background-color: var(--navy);
+}
+
+.application-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  h3 {
+    color: var(--gold);
+    font-family: var(--font-body);
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    color: var(--white);
+    font-family: var(--font-heading);
+    font-size: 48px;
+    font-weight: 400;
+    margin-bottom: 20px;
+  }
+
+  p {
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    width: 50%;
+    margin-bottom: 30px;
+  }
+
+  a {
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-body);
+    border: 1px solid var(--gold);
+    background-color: var(--gold);
+    color: var(--navy);
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  a:hover {
+    background-color: transparent;
+    color: var(--gold);
+  }
+}
 
 /* FOOTER */
 footer {

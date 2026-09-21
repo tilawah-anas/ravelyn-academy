@@ -2,28 +2,27 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* outline: 1px solid; */
 }
 
 @font-face {
-  font-family: "DM Serif Display", serif;
-  src: url(fonts/DMSerifDisplay-Regular.ttf);
+  font-family: "DM Serif Display";
+  src: url("../fonts/DMSerifDisplay-Regular.ttf");
 }
 
 @font-face {
-  font-family: "Inter", sans-serif;
-  src: url(fonts/Inter-VariableFont_opsz\,wght.ttf);
+  font-family: "Inter";
+  src: url("../fonts/Inter-VariableFont_opsz,wght.ttf");
 }
 
 :root {
   --font-heading: "DM Serif Display", serif;
   --font-body: "Inter", sans-serif;
-  --navy: #14213d; /* headings, primary buttons, footer, navbar*/
-  --gold: #c9a227; /* emphasis */
-  --ivory: #f8f6f0; /* main bg */
-  --white: #ffffff; /* main bg, surfaces */
-  --text: #242424; /* body text */
-  --muted: #6b7280; /* footer text or secondary text */
+  --navy: #14213d;
+  --gold: #c9a227;
+  --ivory: #f8f6f0;
+  --white: #ffffff;
+  --text: #242424;
+  --muted: #6b7280;
   --radius-sm: 8px;
   --radius-pill: 999px;
 }
@@ -91,7 +90,292 @@
   }
 }
 
+/* HERO */
+.academics-hero {
+  margin-top: 50px;
+  padding: 120px 80px 100px;
+  background-color: var(--ivory);
+}
 
+.academics-hero-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  h3 {
+    color: var(--navy);
+    font-family: var(--font-body);
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    color: var(--navy);
+    font-family: var(--font-heading);
+    font-size: 50px;
+    font-weight: 400;
+    width: 60%;
+    line-height: 1.1;
+    margin-bottom: 25px;
+  }
+
+  p {
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-size: 15px;
+    width: 55%;
+    line-height: 1.6;
+  }
+}
+
+/* ACADEMIC PROGRAMME */
+.academic-programme {
+  padding: 100px 80px;
+  background-color: var(--white);
+}
+
+.academic-programme-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 60px;
+
+  h3 {
+    color: var(--navy);
+    font-family: var(--font-body);
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  h2 {
+    color: var(--navy);
+    font-family: var(--font-heading);
+    font-size: 40px;
+    font-weight: 400;
+    margin-bottom: 15px;
+  }
+
+  p {
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    width: 55%;
+  }
+}
+
+.academic-programme-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.academic-programme-item {
+  padding: 50px 30px;
+  background-color: var(--ivory);
+  border-radius: var(--radius-sm);
+  transition: 0.3s;
+
+  span {
+    color: var(--gold);
+    font-family: var(--font-body);
+    font-size: 14px;
+  }
+
+  h2 {
+    color: var(--navy);
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 400;
+    margin: 25px 0 15px;
+  }
+
+  p {
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    width: 85%;
+  }
+}
+
+.academic-programme-item:hover {
+  transform: translateY(-4px);
+}
+
+/* LEARNING */
+.learning {
+  padding: 100px 80px;
+  background-color: var(--ivory);
+}
+
+.learning-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+}
+
+.learning-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  h3 {
+    color: var(--navy);
+    font-family: var(--font-body);
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    color: var(--navy);
+    font-family: var(--font-heading);
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  p {
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    width: 85%;
+  }
+}
+
+.learning-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.learning-item {
+  padding: 25px 0;
+  border-bottom: 1px solid var(--navy);
+
+  h3 {
+    color: var(--navy);
+    font-family: var(--font-body);
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    width: 90%;
+  }
+}
+
+.learning-item:first-child {
+  border-top: 1px solid var(--navy);
+}
+
+/* RAVELYN LABS */
+.labs {
+  padding: 100px 80px;
+  background-color: var(--navy);
+}
+
+.labs-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  h3 {
+    color: var(--gold);
+    font-family: var(--font-body);
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    color: var(--white);
+    font-family: var(--font-heading);
+    font-size: 48px;
+    font-weight: 400;
+    margin-bottom: 20px;
+  }
+
+  p {
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.7;
+    width: 60%;
+    margin-bottom: 30px;
+  }
+
+  a {
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-body);
+    border: 1px solid var(--gold);
+    background-color: var(--gold);
+    color: var(--navy);
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  a:hover {
+    background-color: transparent;
+    color: var(--gold);
+  }
+}
+
+/* CTA */
+.academic-cta {
+  padding: 100px 80px;
+  background-color: var(--ivory);
+}
+
+.academic-cta-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  h1 {
+    color: var(--navy);
+    font-family: var(--font-heading);
+    font-size: 42px;
+    font-weight: 400;
+    margin-bottom: 15px;
+  }
+
+  p {
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
+
+  a {
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-body);
+    border: 1px solid var(--navy);
+    background-color: var(--navy);
+    color: var(--ivory);
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  a:hover {
+    background-color: var(--ivory);
+    color: var(--navy);
+  }
+}
 
 /* FOOTER */
 footer {

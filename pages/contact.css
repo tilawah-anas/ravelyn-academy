@@ -2,28 +2,27 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* outline: 1px solid; */
 }
 
 @font-face {
-  font-family: "DM Serif Display", serif;
-  src: url(fonts/DMSerifDisplay-Regular.ttf);
+  font-family: "DM Serif Display";
+  src: url("../fonts/DMSerifDisplay-Regular.ttf");
 }
 
 @font-face {
-  font-family: "Inter", sans-serif;
-  src: url(fonts/Inter-VariableFont_opsz\,wght.ttf);
+  font-family: "Inter";
+  src: url("../fonts/Inter-VariableFont_opsz,wght.ttf");
 }
 
 :root {
   --font-heading: "DM Serif Display", serif;
   --font-body: "Inter", sans-serif;
-  --navy: #14213d; /* headings, primary buttons, footer, navbar*/
-  --gold: #c9a227; /* emphasis */
-  --ivory: #f8f6f0; /* main bg */
-  --white: #ffffff; /* main bg, surfaces */
-  --text: #242424; /* body text */
-  --muted: #6b7280; /* footer text or secondary text */
+  --navy: #14213d;
+  --gold: #c9a227;
+  --ivory: #f8f6f0;
+  --white: #ffffff;
+  --text: #242424;
+  --muted: #6b7280;
   --radius-sm: 8px;
   --radius-pill: 999px;
 }
@@ -91,7 +90,187 @@
   }
 }
 
+/* CONTACT HERO */
+.contact-hero {
+  margin-top: 50px;
+  padding: 120px 80px 100px;
+  background-color: var(--ivory);
+}
 
+.contact-hero-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  h3 {
+    color: var(--navy);
+    font-family: var(--font-body);
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    color: var(--navy);
+    font-family: var(--font-heading);
+    font-size: 50px;
+    font-weight: 400;
+    width: 65%;
+    line-height: 1.1;
+    margin-bottom: 25px;
+  }
+
+  p {
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-size: 15px;
+    width: 55%;
+    line-height: 1.6;
+  }
+}
+
+/* CONTACT */
+.contact {
+  padding: 100px 80px;
+  background-color: var(--white);
+}
+
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+
+.contact-information {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  h3 {
+    color: var(--navy);
+    font-family: var(--font-body);
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    color: var(--navy);
+    font-family: var(--font-heading);
+    font-size: 40px;
+    font-weight: 400;
+    margin-bottom: 15px;
+  }
+
+  p {
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    width: 80%;
+    margin-bottom: 40px;
+  }
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.contact-detail {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--gold);
+
+  span {
+    color: var(--gold);
+    font-size: 18px;
+  }
+
+  h3 {
+    color: var(--navy);
+    font-family: var(--font-body);
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-size: 14px;
+  }
+}
+
+.contact-detail:first-child {
+  border-top: 1px solid var(--gold);
+}
+
+/* CONTACT FORM */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    color: var(--navy);
+    font-family: var(--font-body);
+    font-size: 14px;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--muted);
+    border-radius: var(--radius-sm);
+    background-color: var(--white);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 14px;
+    outline: none;
+  }
+
+  input:focus,
+  textarea:focus {
+    border-color: var(--navy);
+  }
+
+  textarea {
+    resize: vertical;
+  }
+}
+
+.contact-form button {
+  align-self: flex-start;
+  padding: 10px 16px;
+  border: 1px solid var(--navy);
+  border-radius: var(--radius-pill);
+  background-color: var(--navy);
+  color: var(--ivory);
+  font-family: var(--font-body);
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.contact-form button:hover {
+  background-color: var(--ivory);
+  color: var(--navy);
+}
 
 /* FOOTER */
 footer {

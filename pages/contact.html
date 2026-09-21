@@ -1,65 +1,176 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact us | Ravelyn Academy</title>
-  <link rel="stylesheet" href="contact.css">
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-  >
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact | Ravelyn Academy</title>
+    <link rel="stylesheet" href="contact.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-left">
+          <span>R</span>
+        </div>
 
-  <header>
+        <div class="nav-center">
+          <a href="/index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="academics.html">Academics</a>
+          <a href="admissions.html">Admissions</a>
+          <a href="#">Contact us</a>
+        </div>
 
-    <nav class="navbar">
+        <div class="nav-right">
+          <a href="admissions.html" class="nav-button">Apply Now</a>
+        </div>
+      </nav>
+    </header>
 
-      <div class="nav-left">
-        <span>R</span>
+    <main>
+      <section class="contact-hero">
+        <div class="contact-hero-container">
+          <h3>CONTACT RAVELYN</h3>
+
+          <h1>We'd love to hear from you.</h1>
+
+          <p>
+            Whether you're a prospective family, student, or simply interested
+            in learning more about Ravelyn Academy, our team is here to help.
+          </p>
+        </div>
+      </section>
+
+      <section class="contact">
+        <div class="contact-container">
+          <div class="contact-information">
+            <h3>GET IN TOUCH</h3>
+
+            <h2>Have a question?</h2>
+
+            <p>
+              Reach out to us and a member of our team will get back to you with
+              the information you need.
+            </p>
+
+            <div class="contact-details">
+              <div class="contact-detail">
+                <span>
+                  <i class="fa-solid fa-envelope"></i>
+                </span>
+
+                <div>
+                  <h3>Email</h3>
+                  <p>hello@ravelynacademy.com</p>
+                </div>
+              </div>
+
+              <div class="contact-detail">
+                <span>
+                  <i class="fa-solid fa-phone"></i>
+                </span>
+
+                <div>
+                  <h3>Phone</h3>
+                  <p>+234 000 000 0000</p>
+                </div>
+              </div>
+
+              <div class="contact-detail">
+                <span>
+                  <i class="fa-solid fa-location-dot"></i>
+                </span>
+
+                <div>
+                  <h3>Address</h3>
+                  <p>Ravelyn Academy Campus</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-form">
+            <form>
+              <div class="form-group">
+                <label for="name">Full Name</label>
+
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Your name"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email Address</label>
+
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  autocomplete="email"
+                  placeholder="Your email"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="subject">Subject <span>*</span></label>
+
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  placeholder="How can we help?"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="message">Message</label>
+
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="6"
+                  placeholder="Write your message..."
+                ></textarea>
+              </div>
+
+              <button type="submit">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <h3>Ravelyn Academy</h3>
+
+        <p>Learn. Think. Create. Lead.</p>
+
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <span>|</span>
+          <a href="about.html">About</a>
+          <span>|</span>
+          <a href="academics.html">Academics</a>
+          <span>|</span>
+          <a href="admissions.html">Admissions</a>
+          <span>|</span>
+          <a href="#" class="active">Contact us</a>
+        </div>
+
+        <div class="footer-copy">
+          <hr />
+          <p>&copy; 2026 Ravelyn Academy</p>
+        </div>
       </div>
+    </footer>
 
-      <div class="nav-center">
-        <a href="/index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="academics.html">Academics</a>
-        <a href="admissions.html">Admissions</a>
-      </div>
-
-      <div class="nav-right">
-        <a href="admissions.html" class="nav-button">Apply Now</a>
-      </div>
-
-    </nav>
-
-  </header>
-
-  <main></main>
-
-  <footer>
-
-    <div class="footer-content">
-      <h3>Ravelyn Academy</h3>
-      <p>Learn. Think. Create. Lead.</p>
-      <div class="footer-links">
-        <a href="/index.html">Home</a>
-        <span>|</span>
-        <a href="about.html">About</a>
-        <span>|</span>
-        <a href="academics.html">Academics</a>
-        <span>|</span>
-        <a href="admissions.html">Admissions</a>
-      </div>
-      <div class="footer-copy">
-        <hr>
-        <p>
-          &copy; 2026 Ravelyn Academy
-        </p>
-      </div>
-    </div>
-
-  </footer>
-  
-</body>
+  </body>
 </html>
