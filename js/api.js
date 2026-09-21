@@ -1,6 +1,6 @@
 const url = "https://sms.tunnelto.me/api";
 
-const api = async function getData(endpoint) {
+const api = async function(endpoint) {
   try {
     const response = await fetch(`${url}${endpoint}`);
     if (!response.ok) {
@@ -14,6 +14,7 @@ const api = async function getData(endpoint) {
   }
 }
 
+export default api
 // const  =  async function feedbackForm() {
   
 // }
