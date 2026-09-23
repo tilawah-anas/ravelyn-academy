@@ -1,4 +1,5 @@
-const url = "https://sms.tunnelto.me/api";
+// const url = "https://sms.tunnelto.me/api";
+const url = 'http://localhost:3000/api'
 
 const api = async function(endpoint, options ={}) {
   try {
@@ -19,6 +20,3 @@ const api = async function(endpoint, options ={}) {
 }
 
 export default api
-// const  =  async function feedbackForm() {
-  
-// }
