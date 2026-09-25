@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Promotion History | Ravelyn Academy</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="../js/sidebar/sidebar.css" />
+    <link rel="stylesheet" href="/css/promotion-history.css" />
+</head>
+
+<body>
+    <aside id="sidebar" data-base="./"></aside>
+
+    <main class="main-content">
+        <div class="page-header">
+            <div>
+                <h1>Promotion History</h1>
+
+                <p>Review student promotion decisions from previous sessions.</p>
+            </div>
+        </div>
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                </div>
+
+                <div>
+                    <span>Total Records</span>
+                    <strong id="totalHistory">0</strong>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-arrow-up"></i>
+                </div>
+
+                <div>
+                    <span>Promoted</span>
+                    <strong id="promotedHistory">0</strong>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-rotate"></i>
+                </div>
+
+                <div>
+                    <span>Repeated</span>
+                    <strong id="repeatedHistory">0</strong>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+
+                <div>
+                    <span>Graduated</span>
+                    <strong id="graduatedHistory">0</strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <div class="table-toolbar">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input type="text" id="searchInput" placeholder="Search students..." />
+                </div>
+
+                <div class="filter-group">
+                    <select id="sessionFilter">
+                        <option value="">All Sessions</option>
+                    </select>
+
+                    <select id="statusFilter">
+                        <option value="">All Statuses</option>
+                        <option value="promoted">Promoted</option>
+                        <option value="repeated">Repeated</option>
+                        <option value="graduated">Graduated</option>
+                        <option value="pending">Pending</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Session</th>
+                            <th>From Level</th>
+                            <th>To Level</th>
+                            <th>Average</th>
+                            <th>Failed Courses</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="historyTableBody"></tbody>
+                </table>
+            </div>
+
+            <div class="loading-state hidden" id="loadingState">
+                <i class="fa-solid fa-spinner fa-spin"></i>
+                Loading promotion history...
+            </div>
+
+            <div class="empty-state hidden" id="emptyState">
+                <div class="empty-icon">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                </div>
+
+                <h3>No promotion history</h3>
+
+                <p>Promotion results will appear here after a promotion run.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- History Details -->
+
+    <div class="modal-overlay hidden" id="historyModal">
+        <div class="modal">
+            <div class="modal-header">
+                <div>
+                    <h2>Promotion Details</h2>
+                    <p>Promotion decision record</p>
+                </div>
+
+                <button class="modal-close" id="closeHistoryModal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="history-details">
+                <div class="history-student">
+                    <div class="user-avatar large" id="historyAvatar">S</div>
+
+                    <div>
+                        <h3 id="historyStudent">Student</h3>
+
+                        <span class="status-badge" id="historyStatus"> Promoted </span>
+                    </div>
+                </div>
+
+                <div class="detail-grid">
+                    <div>
+                        <span>Academic Session</span>
+                        <strong id="historySession">—</strong>
+                    </div>
+
+                    <div>
+                        <span>From Level</span>
+                        <strong id="historyFromLevel">—</strong>
+                    </div>
+
+                    <div>
+                        <span>To Level</span>
+                        <strong id="historyToLevel">—</strong>
+                    </div>
+
+                    <div>
+                        <span>Average</span>
+                        <strong id="historyAverage">—</strong>
+                    </div>
+
+                    <div>
+                        <span>Failed Courses</span>
+                        <strong id="historyFailed">—</strong>
+                    </div>
+
+                    <div>
+                        <span>Promotion Date</span>
+                        <strong id="historyDate">—</strong>
+                    </div>
+                </div>
+
+                <div class="reason-box">
+                    <span>Reason</span>
+
+                    <p id="historyReason">No reason provided.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="../js/sidebar/sidebar.js"></script>
+    <script type="module" src="/js/promotion/promotion-history.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promotion | Ravelyn Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/js/sidebar/sidebar.css">
+    <link rel="stylesheet" href="/css/promotion.css">
+</head>
+<body>
+    <aside id="sidebar" data-base="./"></aside>
+    <main class="main-content">
+        <div class="page-header">
+            <div>
+                <h1>Promotion</h1>
+                <p> Run student promotion for a completed academic session. </p>
+            </div>
+        </div>
+
+        <section class="info-banner">
+            <div class="info-icon">
+                <i class="fa-solid fa-circle-info"></i>
+            </div>
+            <div>
+                <strong> Before running promotion </strong>
+                <p>
+                    Make sure all student results have been entered and promotion rules have been configured for the session.
+                </p>
+            </div>
+        </section>
+        <section class="promotion-layout">
+            <div class="content-card session-card">
+                <div class="card-header">
+                    <div>
+                        <h2>Run Promotion</h2>
+                        <p> Select the academic session to process. </p>
+                    </div>
+                    <div class="card-icon">
+                        <i class="fa-solid fa-arrow-up-right-dots"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="sessionSelect"> Academic Session </label>
+                    <select id="sessionSelect">
+                        <option value=""> Select academic session </option>
+                    </select>
+                </div>
+
+                <div class="session-summary hidden" id="sessionSummary">
+                    <div class="summary-row">
+                        <span>Session</span>
+                        <strong id="summaryName">—</strong>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Status</span>
+                        <span id="summaryStatus">—</span>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Promotion Status</span>
+                        <span id="summaryPromotionStatus">—</span>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>End Date</span>
+                        <strong id="summaryEndDate">—</strong>
+                    </div>
+                </div>
+
+                <div class="rule-warning hidden" id="ruleWarning">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span>No active promotion rules were found for this session. </span>
+                </div>
+
+                <button class="btn btn-primary run-btn" id="runPromotion" disabled>
+                    <i class="fa-solid fa-play"></i>
+                    Run Promotion
+                </button>
+            </div>
+
+            <!-- Requirements -->
+            <div class="content-card requirements-card">
+                <div class="card-header">
+                    <div>
+                        <h2>Promotion Process</h2>
+                        <p>
+                            How Ravelyn Academy processes promotion.
+                        </p>
+                    </div>
+                </div>
+                <div class="process-list">
+                    <div class="process-item">
+                        <div class="process-number"> 1 </div>
+                        <div> <strong>Check session</strong>
+                            <p> The selected academic session must be completed. </p>
+                        </div>
+                    </div>
+
+                    <div class="process-item">
+                        <div class="process-number"> 2 </div>
+                        <div>
+                            <strong>Calculate results</strong>
+                            <p> Student performance is evaluated from recorded term results. </p>
+                        </div>
+                    </div>
+
+                    <div class="process-item">
+                        <div class="process-number"> 3 </div>
+                        <div>
+                            <strong>Apply rules</strong>
+                            <p> Active promotion rules determine whether a student advances or repeats.</p>
+                        </div>
+                    </div>
+
+                    <div class="process-item">
+                        <div class="process-number"> 4 </div>
+                        <div>
+                            <strong>Record decision</strong>
+                            <p> Every promotion decision is saved in promotion history. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Result -->
+        <section class="content-card result-card hidden" id="resultCard">
+            <div class="card-header">
+                <div>
+                    <h2>Promotion Completed</h2>
+                    <p id="resultMessage"> Promotion has been completed successfully. </p>
+                </div>
+                <div class="success-icon">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+            </div>
+
+            <div class="result-stats">
+                <div>
+                    <span>Promoted</span>
+                    <strong id="resultPromoted">0</strong>
+                </div>
+                <div>
+                    <span>Repeated</span>
+                    <strong id="resultRepeated">0</strong>
+                </div>
+                <div>
+                    <span>Graduated</span>
+                    <strong id="resultGraduated">0</strong>
+                </div>
+                <div>
+                    <span>Pending</span>
+                    <strong id="resultPending">0</strong>
+                </div>
+            </div>
+
+            <div class="result-actions">
+                <a href="./promotion-history.html" class="btn btn-secondary">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    View Promotion History
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Confirmation -->
+    <div class="modal-overlay hidden" id="confirmationModal">
+        <div class="modal modal-small">
+            <div class="modal-header">
+                <div>
+                    <h2>Run Promotion?</h2>
+                    <p> This action will process students for the selected academic session. </p>
+                </div>
+                <button class="modal-close" id="closeConfirmation">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="confirmation-content">
+                <div class="warning-icon">
+                    <i class="fa-solid fa-arrow-up"></i>
+                </div>
+                <p> Are you sure you want to run promotion for <strong id="confirmationSession"> this session </strong>? </p>
+                <span> Promotion decisions will be recorded in promotion history. </span>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelPromotion"> Cancel </button>
+                <button class="btn btn-primary" id="confirmPromotion">
+                    Run Promotion
+                </button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="/js/sidebar/sidebar.js"></script>
+    <script type="module" src="/js/promotion/promotion.js"></script>
+</body>
+
+</html>

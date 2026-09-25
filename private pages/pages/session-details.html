@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session Details | Ravelyn Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/session-details.css">
+</head>
+
+<body>
+    <!-- <div id="sidebar-container"></div> -->
+    <main class="main-content">
+        <header class="page-header">
+            <div class="header-left">
+                <a href="./sessions.html" class="back-link">
+                    <i class="fa-solid fa-arrow-left"></i> Academic Sessions
+                </a>
+                <div class="title-row">
+                    <div>
+                        <p class="page-eyebrow"> Academic Session </p>
+                        <h1 id="sessionName"> Loading... </h1>
+                    </div>
+                    <span id="sessionStatus" class="status-badge"> — </span>
+                </div>
+                <p id="sessionDates" class="page-description"> Loading session dates... </p>
+            </div>
+            <div class="header-actions">
+                <!-- <button class="btn btn-secondary" id="editSessionBtn">
+                    <i class="fa-solid fa-pen"></i>
+                    Edit Session
+                </button> -->
+                <button class="btn btn-primary hidden" id="activateSessionBtn">
+                    <i class="fa-solid fa-play"></i>
+                    Activate Session
+                </button>
+            </div>
+        </header>
+
+        <!-- Session Summary -->
+        <section class="session-summary">
+            <div class="summary-card">
+                <div class="summary-icon">
+                    <i class="fa-solid fa-calendar-plus"></i>
+                </div>
+                <div>
+                    <span>Start Date</span>
+                    <strong id="summaryStartDate">—</strong>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-icon">
+                    <i class="fa-solid fa-calendar-check"></i>
+                </div>
+                <div>
+                    <span>End Date</span>
+                    <strong id="summaryEndDate">—</strong>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <div class="summary-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div>
+                    <span>Promotion</span>
+                    <strong id="promotionStatus">Pending</strong>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <div class="summary-icon">
+                    <i class="fa-solid fa-circle-dot"></i>
+                </div>
+                <div>
+                    <span>Current Session</span>
+                    <strong id="currentStatus">No</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- Terms -->
+        <section class="terms-section">
+            <div class="section-header">
+                <div>
+                    <p class="section-eyebrow"> Academic Structure </p>
+                    <h2>Terms</h2>
+                    <p> Manage the three terms for this academic session. </p>
+                </div>
+                <button class="btn btn-primary hidden" id="createTermsBtn">
+                    <i class="fa-solid fa-plus"></i> Create Terms
+                </button>
+            </div>
+
+            <!-- Terms Loading -->
+            <div id="termsLoading" class="terms-state">
+                <div class="loading-spinner"></div>
+                <p>Loading terms...</p>
+            </div>
+
+            <!-- Terms -->
+            <div id="termsGrid" class="terms-grid"></div>
+
+            <!-- No Terms -->
+            <div id="noTerms" class="terms-state hidden">
+                <div class="empty-icon">
+                    <i class="fa-regular fa-calendar"></i>
+                </div>
+                <h3>Terms haven't been created</h3>
+                <p>Create First, Second and Third Term for this session. </p>
+                <button class="btn btn-primary" id="createTermsEmptyBtn">
+                    <i class="fa-solid fa-plus"></i>
+                    Create Three Terms
+                </button>
+            </div>
+
+            <!-- Error -->
+            <div id="termsError" class="terms-state hidden">
+                <div class="empty-icon error">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <h3>Unable to load terms</h3>
+                <p id="termsErrorMessage">
+                    Something went wrong.
+                </p>
+                <button class="btn btn-secondary" id="retryTermsBtn">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    Try Again
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Create Terms Modal -->
+    <div id="termsModal" class="modal-overlay hidden">
+        <div class="modal">
+            <div class="modal-header">
+                <div>
+                    <h2>Create Academic Terms</h2>
+                    <p>
+                        Define the dates for all three terms.
+                    </p>
+                </div>
+                <button type="button" class="modal-close" id="closeTermsModal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <form id="termsForm">
+                <!-- First -->
+                <div class="term-form-card">
+                    <div class="term-number"> 01</div>
+                    <div class="term-form-content">
+                        <h3>First Term</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label> Start Date </label>
+                                <input type="date" id="firstStartDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label> End Date </label>
+                                <input type="date" id="firstEndDate" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Second -->
+                <div class="term-form-card">
+                    <div class="term-number"> 02 </div>
+                    <div class="term-form-content">
+                        <h3>Second Term</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label> Start Date </label>
+                                <input type="date" id="secondStartDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label> End Date </label>
+                                <input type="date" id="secondEndDate" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Third -->
+                <div class="term-form-card">
+                    <div class="term-number"> 03 </div>
+                    <div class="term-form-content">
+                        <h3>Third Term</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label> Start Date </label>
+                                <input type="date" id="thirdStartDate" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label> End Date </label>
+                                <input type="date" id="thirdEndDate" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="termsFormError" class="form-error hidden"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelTermsBtn"> Cancel </button>
+                    <button type="submit" class="btn btn-primary" id="saveTermsBtn">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Create Terms
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Complete Term Modal -->
+    <div id="completeTermModal" class="modal-overlay hidden">
+        <div class="modal modal-small">
+            <div class="confirm-icon success">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h2>Conclude Term?</h2>
+            <p>
+                Are you sure you want to conclude
+                <strong id="completeTermName"></strong>?
+            </p>
+            <p class="warning-text"> A concluded term cannot be activated again. </p>
+            <div id="completeTermError" class="form-error hidden"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelCompleteTermBtn">Cancel </button>
+                <button type="button" class="btn btn-primary" id="confirmCompleteTermBtn">
+                    <i class="fa-solid fa-check"></i>
+                    Conclude Term
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Activate Session Modal -->
+    <div id="activateSessionModal" class="modal-overlay hidden">
+        <div class="modal modal-small">
+            <div class="confirm-icon success">
+                <i class="fa-solid fa-play"></i>
+            </div>
+            <h2>Activate Session?</h2>
+            <p>
+                Are you sure you want to activate
+                <strong id="activateSessionName"></strong>?
+            </p>
+            <p class="warning-text">
+                The currently active session will be marked as completed. This cannot be undone.
+            </p>
+            <div id="activateSessionError" class="form-error hidden"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelActivateSessionBtn"> Cancel </button>
+                <button type="button" class="btn btn-primary" id="confirmActivateSessionBtn">
+                    <i class="fa-solid fa-play"></i>
+                    Activate Session
+                </button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="../js/session-details.js"></script>
+</body>
+</html>

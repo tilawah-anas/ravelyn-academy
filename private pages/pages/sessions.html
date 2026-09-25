@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Sessions | Ravelyn Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../js/sidebar/sidebar.css">
+    <link rel="stylesheet" href="../css/sessions.css">
+</head>
+<body>
+    <aside id="sidebar" data-base="./"></aside>
+    <main class="main-content">
+        <header class="page-header">
+            <div>
+                <p class="page-eyebrow">Academic Management</p>
+                <h1>Academic Sessions</h1>
+                <p class="page-description"> Manage academic years, session timelines and completion status. </p>
+            </div>
+            <button class="btn btn-primary" id="openCreateSessionBtn"><i class="fa-solid fa-plus"></i> New Session </button>
+        </header>
+        <!-- Statistics -->
+        <section class="session-stats">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-calendar-days"></i>
+                </div>
+                <div>
+                    <span class="stat-label">Total Sessions</span>
+                    <strong id="totalSessions">0</strong>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon current">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div>
+                    <span class="stat-label">Current Session</span>
+                    <strong id="currentSession">—</strong>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon upcoming">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+                <div>
+                    <span class="stat-label">Upcoming</span>
+                    <strong id="upcomingSessions">0</strong>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon completed">
+                    <i class="fa-solid fa-check-double"></i>
+                </div>
+                <div>
+                    <span class="stat-label">Completed</span>
+                    <strong id="completedSessions">0</strong>
+                </div>
+            </div>
+        </section>
+        <!-- Toolbar -->
+        <section class="sessions-toolbar">
+            <div class="search-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="search" id="sessionSearch" placeholder="Search sessions..." >
+            </div>
+            <div class="filter-wrapper">
+                <select id="statusFilter">
+                    <option value="all">All Statuses</option>
+                    <option value="upcoming">Upcoming</option>
+                    <option value="active">Active</option>
+                    <option value="completed">Completed</option>
+                </select>
+            </div>
+        </section>
+        <!-- Sessions -->
+        <section class="sessions-section">
+            <div class="sessions-grid" id="sessionsGrid" ></div>
+            <!-- Loading -->
+            <div class="sessions-state" id="loadingState">
+                <div class="loading-spinner"></div>
+                <p>Loading academic sessions...</p>
+            </div>
+            <!-- Empty -->
+            <div  class="sessions-state hidden" id="emptyState">
+                <div class="empty-icon">
+                    <i class="fa-regular fa-calendar-xmark"></i>
+                </div>
+                <h3>No academic sessions found</h3>
+                <p> Create your first academic session to get started. </p>
+                <button class="btn btn-primary" id="emptyCreateBtn" ><i class="fa-solid fa-plus"></i>Create Session</button>
+            </div>
+            <!-- Error -->
+            <div class="sessions-state hidden" id="errorState">
+                <div class="empty-icon error">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <h3>Unable to load sessions</h3>
+                <p id="errorMessage"> Something went wrong. </p>
+                <button class="btn btn-secondary" id="retryBtn">
+                    <i class="fa-solid fa-rotate-right"></i> Try Again
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Create / Edit Modal -->
+    <div class="modal-overlay hidden" id="sessionModal" >
+        <div class="modal">
+            <div class="modal-header">
+                <div>
+                    <h2 id="modalTitle">Create Academic Session</h2>
+                    <p> Set the academic session name and timeline. </p>
+                </div>
+                <button class="modal-close" id="closeSessionModal" type="button">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <form id="sessionForm">
+                <input type="hidden" id="sessionId" >
+                <div class="form-group">
+                    <label for="sessionName"> Session Name</label>
+                    <input type="text" id="sessionName" placeholder="e.g. 2026/2027" required >
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="startDate"> Start Date </label>
+                        <input type="date" id="startDate" required >
+                    </div>
+                    <div class="form-group">
+                        <label for="endDate"> End Date </label>
+                        <input type="date" id="endDate" required >
+                    </div>
+                </div>
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="isCurrent">
+                        <span> Set as current academic session </span>
+                    </label>
+                </div>
+                <div class="form-error hidden" id="formError" ></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelSessionBtn" > Cancel </button>
+                    <button type="submit" class="btn btn-primary" id="saveSessionBtn" >
+                        <i class="fa-solid fa-floppy-disk"></i> Save Session
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Delete Modal -->
+    <div class="modal-overlay hidden" id="deleteModal" >
+        <div class="modal modal-small">
+            <div class="confirm-icon danger">
+                <i class="fa-solid fa-trash"></i>
+            </div>
+            <h2>Delete Session?</h2>
+            <p> You are about to delete <strong id="deleteSessionName"></strong>. This action cannot be undone.</p>
+            <div class="form-error hidden" id="deleteError" ></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelDeleteBtn" > Cancel </button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn" >
+                    <i class="fa-solid fa-trash"></i> Delete Session
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Complete Session Modal -->
+    <div class="modal-overlay hidden" id="completeModal" >
+        <div class="modal modal-small">
+            <div class="confirm-icon success">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h2>Complete Session?</h2>
+            <p> Are you sure you want to complete <strong id="completeSessionName"></strong>? </p>
+            <p class="warning-text"> Session can only be completed after all terms are over </p>
+            <div class="form-error hidden" id="completeError" ></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelCompleteBtn" > Cancel </button>
+                <button type="button" class="btn btn-primary" id="confirmCompleteBtn" >
+                    <i class="fa-solid fa-check"></i> Complete Session
+                </button>
+            </div>
+        </div>
+    </div>
+     <script type="module" src="../js/sidebar/sidebar.js"></script>
+    <script type="module" src="../js/sessions.js"></script>
+
+</body>
+</html>

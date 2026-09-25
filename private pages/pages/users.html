@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Users | Ravelyn Academy</title>
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../js/sidebar/sidebar.css">
+    <link rel="stylesheet" href="../css/users.css">
+</head>
+
+<body>
+
+<aside id="sidebar" data-base="./"></aside>
+
+<main class="main-container">
+
+    <div class="page-header">
+        <div>
+            <h1>Users</h1>
+            <p>Manage staff and student accounts across Ravelyn Academy.</p>
+        </div>
+
+        <button class="btn btn-primary" id="openUserModal">
+            <i class="fa-solid fa-user-plus"></i>
+            Add User
+        </button>
+    </div>
+
+
+    <!-- Stats -->
+    <section class="stats-grid">
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fa-solid fa-users"></i>
+            </div>
+
+            <div>
+                <span class="stat-label">Total Users</span>
+                <strong id="totalUsers">0</strong>
+            </div>
+        </div>
+
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fa-solid fa-chalkboard-user"></i>
+            </div>
+
+            <div>
+                <span class="stat-label">Teachers</span>
+                <strong id="teacherUsers">0</strong>
+            </div>
+        </div>
+
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fa-solid fa-user-graduate"></i>
+            </div>
+
+            <div>
+                <span class="stat-label">Students</span>
+                <strong id="studentUsers">0</strong>
+            </div>
+        </div>
+
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fa-solid fa-user-check"></i>
+            </div>
+
+            <div>
+                <span class="stat-label">Active Users</span>
+                <strong id="activeUsers">0</strong>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- Users -->
+    <section class="content-card">
+
+        <div class="table-toolbar">
+
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search users by name or email..."
+                >
+            </div>
+
+
+            <div class="filter-group">
+
+                <select id="roleFilter">
+                    <option value="">All Roles</option>
+                    <option value="admin">Admin</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="student">Student</option>
+                </select>
+
+
+                <select id="statusFilter">
+                    <option value="">All Statuses</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table class="data-table">
+
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="userTableBody">
+                    <!-- Users rendered by JavaScript -->
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div class="loading-state" id="loadingState">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            <span>Loading users...</span>
+        </div>
+
+
+        <div class="empty-state hidden" id="emptyState">
+
+            <div class="empty-icon">
+                <i class="fa-solid fa-users"></i>
+            </div>
+
+            <h3>No users found</h3>
+
+            <p>
+                There are no users matching your current filters.
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- Add User Modal -->
+<div class="modal-overlay hidden" id="userModal">
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div>
+                <h2 id="modalTitle">Add User</h2>
+                <p>Create a new staff or student account.</p>
+            </div>
+
+            <button class="modal-close" id="closeUserModal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+
+        <form id="userForm">
+
+            <div class="form-group">
+                <label for="userType">Account Type</label>
+
+                <select id="userType" required>
+                    <option value="">Select account type</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="student">Student</option>
+                </select>
+            </div>
+
+
+            <!-- Teacher fields -->
+            <div id="teacherFields" class="hidden">
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+
+                        <input
+                            type="text"
+                            id="firstName"
+                            placeholder="Enter first name"
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+
+                        <input
+                            type="text"
+                            id="lastName"
+                            placeholder="Enter last name"
+                        >
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+                    <label for="teacherEmail">Email</label>
+
+                    <input
+                        type="email"
+                        id="teacherEmail"
+                        placeholder="teacher@example.com"
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="teacherPassword">Password</label>
+
+                    <div class="password-input">
+                        <input
+                            type="password"
+                            id="teacherPassword"
+                            placeholder="Minimum 6 characters"
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            data-target="teacherPassword"
+                        >
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Student fields -->
+            <div id="studentFields" class="hidden">
+
+                <div class="form-group">
+                    <label for="studentSelect">Student</label>
+
+                    <select id="studentSelect">
+                        <option value="">Select student</option>
+                    </select>
+
+                    <small>
+                        Only students without existing accounts are shown.
+                    </small>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="studentEmail">Email</label>
+
+                    <input
+                        type="email"
+                        id="studentEmail"
+                        placeholder="student@example.com"
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="studentPassword">Password</label>
+
+                    <div class="password-input">
+                        <input
+                            type="password"
+                            id="studentPassword"
+                            placeholder="Minimum 6 characters"
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            data-target="studentPassword"
+                        >
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    id="cancelUser"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                    id="submitUser"
+                >
+                    <i class="fa-solid fa-user-plus"></i>
+                    Create User
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- User Details Modal -->
+<div class="modal-overlay hidden" id="detailsModal">
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div>
+                <h2>User Details</h2>
+                <p>Account information</p>
+            </div>
+
+            <button class="modal-close" id="closeDetailsModal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+
+        <div class="user-details">
+
+            <div class="user-profile">
+
+                <div class="user-avatar large" id="detailsAvatar">
+                    U
+                </div>
+
+                <div>
+                    <h3 id="detailsName">User Name</h3>
+                    <span id="detailsRole" class="role-badge">
+                        Teacher
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="details-list">
+
+                <div class="detail-item">
+                    <span>Email</span>
+                    <strong id="detailsEmail">—</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>Status</span>
+                    <strong id="detailsStatus">—</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>Created</span>
+                    <strong id="detailsCreated">—</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Deactivate Modal -->
+<div class="modal-overlay hidden" id="deactivateModal">
+
+    <div class="modal modal-small">
+
+        <div class="modal-header">
+
+            <div>
+                <h2>Deactivate User</h2>
+                <p>Confirm account deactivation.</p>
+            </div>
+
+            <button class="modal-close" id="closeDeactivateModal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+
+        <div class="confirmation-content">
+
+            <div class="warning-icon">
+                <i class="fa-solid fa-user-slash"></i>
+            </div>
+
+            <p>
+                Are you sure you want to deactivate
+                <strong id="deactivateUserName">this user</strong>?
+            </p>
+
+            <span>
+                The user will no longer be able to use their account.
+            </span>
+
+        </div>
+
+
+        <div class="modal-footer">
+
+            <button
+                type="button"
+                class="btn btn-secondary"
+                id="cancelDeactivate"
+            >
+                Cancel
+            </button>
+
+            <button
+                type="button"
+                class="btn btn-danger"
+                id="confirmDeactivate"
+            >
+                Deactivate
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script type="module" src="../js/sidebar/sidebar.js"></script>
+<script type="module" src="../js/users.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta  name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | School Management</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../js/sidebar/sidebar.css">
+    <link rel="stylesheet"  href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+</head>
+<body class="dashboard-page">
+    <aside id="sidebar" data-base="./"></aside>
+    <div class="app-container">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button type="button" id="sidebarToggle" class="menu-button" aria-label="Open navigation">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div>
+                    <p class="page-label">Overview</p>
+                    <h1> Dashboard</h1>
+                </div>
+            </div>
+            <div class="topbar-right">
+                <div class="user-menu">
+                    <div class="user-avatar">
+                        {user.name.charAt(0).toUppercase}
+                    </div>
+                    <div class="user-info">
+                        <strong id="userName"> {user.name}</strong>
+                        <span id="userRole"> {user.role} </span>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class="dashboard-content">
+            <section class="welcome-section">
+                <div>
+                    <p class="eyebrow">School overview</p>
+                    <h2 id="welcomeName">Welcome {user.name}</h2>
+                    <p> Here's an overview Ravelyn Academy's current academic activities.</p>
+                </div>
+            </section>
+            <!-- stats grid section -->
+            <section class="stats-grid">
+                <!-- for student card -->
+                <article class="stat-card">
+                    <div class="stat-card-header">
+                        <span class="stat-icon"><i class="fa-regular fa-user"></i></span>
+                        <span class="stat-label"> Students </span>
+                    </div>
+                    <strong id="studentCount" class="stat-value"> {student.count} </strong>
+                    <p class="stat-description"> Total registered students </p>
+                </article>
+
+                <!-- for classes card -->
+                <article class="stat-card">
+                    <div class="stat-card-header">
+                        <span class="stat-icon"><i class="fa-doutone fa-solid fa-school"></i></span>
+                        <span class="stat-label">Classes</span>
+                    </div>
+                    <strong id="classCount" class="stat-value">{class.count}</strong>
+                    <p class="stat-description"> Active classes </p>
+                </article>
+
+                <!-- Courses card -->
+                <article class="stat-card">
+                    <div class="stat-card-header">
+                        <span class="stat-icon"> <i class="fa-solid fa-book"></i></span>
+                        <span class="stat-label"> Courses </span>
+                    </div>
+                    <strong id="courseCount" class="stat-value" > {course.count} </strong>
+                    <p class="stat-description"> Available courses </p>
+                </article>
+
+                <!-- card for current sesstion -->
+                <article class="stat-card">
+                    <div class="stat-card-header">
+                        <span class="stat-icon"><i class="fa-regular fa-clock"></i> </span>
+                        <span class="stat-label"> Current Session </span>
+                    </div>
+                    <strong id="sessionName" class="stat-value stat-value-small"> {session.name}</strong>
+                    <p id="sessionStatus" class="stat-description"> Loading session... </p>
+                </article>
+            </section>
+
+            <!-- info and quick links grid -->
+            <section class="dashboard-grid">
+                <article class="dashboard-card">
+                    <div class="card-header">
+                        <div>
+                            <p class="eyebrow"> Academic </p>
+                            <h3> Current Session </h3>
+                        </div>
+                    </div>
+                    <div id="sessionDetails" class="session-details" >
+                        <div class="loading-placeholder"> Loading...{session.status} </div>
+                    </div>
+                </article>
+
+                <!-- quick access links -->
+                <article class="dashboard-card">
+                    <div class="card-header">
+                        <div>
+                            <p class="eyebrow">Quick access</p>
+                            <h3> Common actions</h3>
+                        </div>
+                    </div>
+                    <!-- quick action links -->
+                    <div class="quick-actions">
+                        <a href="./students.html" class="quick-action" >
+                            <span>Students</span>
+                            <span><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                        <a href="./results.html" class="quick-action">
+                            <span>Enter results</span>
+                            <span><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                        <a href="./enrollments.html" class="quick-action" >
+                            <span>Manage enrollments</span>
+                            <span><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                        <a href="./promotion.html" class="quick-action">
+                            <span>Promotion</span>
+                            <span><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </article>
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="../js/sidebar/sidebar.js"></script>
+    <script type="module" src="../js/dashboard.js" ></script>
+</body>
+</html>

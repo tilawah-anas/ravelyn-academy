@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promotion Rules | Ravelyn Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../js/sidebar/sidebar.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/promotion-rule.css">
+</head>
+
+<body>
+    <aside id="sidebar" data-base="./"></aside>
+    <main class="main-content">
+        <div class="page-header">
+            <div>
+                <h1>Promotion Rules</h1>
+                <p>Configure the academic criteria used to promote students.</p>
+            </div>
+            <button class="btn btn-primary" id="openRuleModal">
+                <i class="fa-solid fa-plus"></i>
+                Add Rule
+            </button>
+        </div>
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-list-check"></i>
+                </div>
+                <div>
+                    <span>Total Rules</span>
+                    <strong id="totalRules">0</strong>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div>
+                    <span>Active Rules</span>
+                    <strong id="activeRules">0</strong>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </div>
+                <div>
+                    <span>Inactive Rules</span>
+                    <strong id="inactiveRules">0</strong>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <div>
+                    <span>Level Transitions</span>
+                    <strong id="levelTransitions">0</strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <div class="table-toolbar">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="searchInput" placeholder="Search promotion rules...">
+                </div>
+                <select id="statusFilter">
+                    <option value="">All Statuses</option>
+                    <option value="true">Active</option>
+                    <option value="false">Inactive</option>
+                </select>
+            </div>
+
+            <div class="table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Academic Session</th>
+                            <th>From Level</th>
+                            <th>To Level</th>
+                            <th>Pass Mark</th>
+                            <th>Min. Average</th>
+                            <th>Max Failed</th>
+                            <th>Approval</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rulesTableBody"></tbody>
+                </table>
+            </div>
+            <div class="loading-state hidden" id="loadingState">
+                <i class="fa-solid fa-spinner fa-spin"></i>
+                Loading promotion rules...
+            </div>
+            <div class="empty-state hidden" id="emptyState">
+                <div class="empty-icon">
+                    <i class="fa-solid fa-list-check"></i>
+                </div>
+                <h3>No promotion rules found</h3>
+                <p> Create a promotion rule to define how students advance between levels.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rule Modal -->
+    <div class="modal-overlay hidden" id="ruleModal">
+        <div class="modal">
+            <div class="modal-header">
+                <div>
+                    <h2 id="modalTitle">Create Promotion Rule</h2>
+                    <p>Define promotion requirements.</p>
+                </div>
+                <button class="modal-close" id="closeRuleModal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <form id="ruleForm">
+                <input type="hidden" id="ruleId">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="academicSession">Academic Session</label>
+                        <select id="academicSession" required>
+                            <option value="">Select session </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fromLevel"> From Level </label>
+                        <select id="fromLevel" required>
+                            <option value=""> Select level </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="toLevel">To Level</label>
+                    <select id="toLevel">
+                        <option value="">Select destination level </option>
+                    </select>
+                    <small> Leave empty if the source level is graduating. </small>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="defaultPassMark"> Default Pass Mark </label>
+                        <input type="number" id="defaultPassMark" min="0" max="100" value="40" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="minimumAverage"> Minimum Average </label>
+                        <input type="number" id="minimumAverage" min="0" max="100" placeholder="Optional">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="maximumFailedCourses"> Maximum Failed Courses </label>
+                        <input type="number" id="maximumFailedCourses" min="0" placeholder="Optional">
+                    </div>
+                    <div class="form-group">
+                        <label for="minimumAttendance"> Minimum Attendance (%) </label>
+                        <input type="number" id="minimumAttendance" min="0" max="100" placeholder="Optional">
+                    </div>
+                </div>
+                <div class="toggle-row">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="requiresApproval">
+                        <span> Requires manual approval </span>
+                    </label>
+                    <label class="toggle-label">
+                        <input type="checkbox" id="active" checked>
+                        <span> Active rule </span>
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelRule"> Cancel </button>
+                    <button type="submit" class="btn btn-primary"> Save Rule </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="module" src="../js/sidebar/sidebar.js"></script>
+    <script type="module" src="/js/promotion/promotion-rules.js"></script>
+</body>
+
+</html>

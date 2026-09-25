@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrolments | Ravelyn Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../js/sidebar/sidebar.css">
+    <link rel="stylesheet" href="../css/enrollments.css">
+</head>
+<body>
+    <aside id="sidebar" data-base="./"></aside>
+    <main class="main-content">
+        <header class="page-header">
+            <div>
+                <h1>Enrolments</h1>
+                <p>Manage student enrolments across academic sessions.</p>
+            </div>
+            <button class="btn btn-primary" id="openEnrollmentModal">
+                <i class="fa-solid fa-user-plus"></i>
+                Add Enrolment
+            </button>
+        </header>
+
+        <!-- Statistics -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <div>
+                    <span>Total Enrolments</span>
+                    <strong id="totalEnrollments">0</strong>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-user-check"></i>
+                </div>
+                <div>
+                    <span>Active</span>
+                    <strong id="activeEnrollments">0</strong>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div>
+                    <span>Completed</span>
+                    <strong id="completedEnrollments">0</strong>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-calendar-check"></i>
+                </div>
+                <div>
+                    <span>Current Session</span>
+                    <strong id="currentSessionEnrollments">0</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filters -->
+        <section class="content-card">
+            <div class="filters">
+                <div class="search-box">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search student...">
+                </div>
+                <select id="sessionFilter" class='filter-select'> <option value="">All Sessions</option> </select>
+                <select id="levelFilter" class='filter-select'> <option value="">All Levels</option> </select>
+                <select id="classFilter" class='filter-select'> <option value="">All Classes</option> </select>
+                <select id="statusFilter" class='filter-select'>
+                    <option value="">All Statuses</option>
+                    <option value="active">Active</option>
+                    <option value="completed">Completed</option>
+                    <option value="promoted">Promoted</option>
+                    <option value="repeated">Repeated</option>
+                    <option value="withdrawn">Withdrawn</option>
+                </select>
+            </div>
+            <!-- Table -->
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Session</th>
+                            <th>Level</th>
+                            <th>Class</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="enrollmentTableBody">
+                        <tr>
+                            <td colspan="6" class="loading-cell">
+                                Loading enrolments...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="emptyState" class="empty-state hidden">
+                <i class="fa-solid fa-user-group"></i>
+                <h3>No enrolments found</h3>
+                <p>No enrolments match your current filters. </p>
+            </div>
+        </section>
+    </main>
+    <!-- Enrollment Modal -->
+    <div class="modal-overlay hidden" id="enrollmentModal">
+    <div class="modal">
+
+        <div class="modal-header">
+            <div>
+                <h2 id="modalTitle">Add Enrolment</h2>
+                <p>Create a new student enrolment.</p>
+            </div>
+            <button class="modal-close" id="closeEnrollmentModal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <form id="enrollmentForm">
+
+            <input type="hidden" id="enrollmentId">
+
+            <div class="form-grid">
+
+                <!-- Student — user picks -->
+                <div class="form-group full-width">
+                    <label for="student">Student</label>
+                    <select id="student" required>
+                        <option value="">Select student</option>
+                    </select>
+                </div>
+
+                <!-- Session — derived, read-only -->
+                <div class="form-group">
+                    <label for="academicSessionDisplay">Academic Session</label>
+                    <input
+                        type="text"
+                        id="academicSessionDisplay"
+                        readonly
+                        placeholder="Loading..."
+                    >
+                    <small class="form-hint">
+                        Set from the currently active session.
+                    </small>
+                </div>
+
+                <!-- Level — derived from student, read-only -->
+                <div class="form-group">
+                    <label for="levelDisplay">Level</label>
+                    <input
+                        type="text"
+                        id="levelDisplay"
+                        readonly
+                        placeholder="Select a student first"
+                    >
+                    <small class="form-hint">
+                        Set automatically from the student.
+                    </small>
+                </div>
+
+                <!-- Class — filtered by the student's level -->
+                <div class="form-group">
+                    <label for="class">Class</label>
+                    <select id="class" required disabled>
+                        <option value="">Select a student first</option>
+                    </select>
+                </div>
+
+                <!-- Status — user picks -->
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select id="status">
+                        <option value="active">Active</option>
+                        <option value="completed">Completed</option>
+                        <option value="withdrawn">Withdrawn</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" id="cancelEnrollment">
+                    Cancel
+                </button>
+                <button type="submit" class="btn btn-primary" id="submitEnrollment">
+                    Save Enrolment
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+    <!-- Delete Modal -->
+    <div class="modal-overlay hidden" id="deleteModal">
+        <div class="modal modal-small">
+            <div class="delete-icon">
+                <i class="fa-solid fa-trash"></i>
+            </div>
+            <h2>Delete Enrolment?</h2>
+            <p> This action cannot be undone. The student's enrolment record will be permanently removed. </p>
+            <div class="form-actions">
+                <button class="btn btn-secondary" id="cancelDelete"> Cancel </button>
+                <button class="btn btn-danger" id="confirmDelete"> Delete </button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="../js/sidebar/sidebar.js"></script>
+    <script type="module" src="../js/enrollments.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <metaname="viewport" content="width=device-width, initial-scale=1.0" >
+    <title>Sign in | Ravelyn Academy</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+</head>
+<body class="auth-page">
+    <main class="auth-container">
+        <section class="auth-card">
+            <div class="auth-header">
+                <h1>Welcome back</h1>
+                <p> Sign in to your account </p>
+            </div>
+
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="email"> Email </label>
+                    <input type="email" id="email" name="email" class="holder" placeholder="youremail@email.com" autocomplete="email"  >
+                </div>
+                <div class="form-group">
+                    <label for="password"> Password </label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" name="password" placeholder="******" autocomplete="current-password" >
+                        <button type="button" id="togglePassword" class="password-toggle" aria-label="Show password">
+                           <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                    <a href="/" class="forgot">Forgot Password?</a>
+                </div>
+                
+                <div id="loginError" class="form-error" role="alert"></div>
+                <button type="submit"  id="loginButton" class="auth-button">
+                    <span id="loginButtonText">
+                        Sign in
+                    </span>
+                </button>
+            </form>
+        </section>
+    </main>
+    <script type="module" src="./js/auth.js"></script>
+</body>
+</html>

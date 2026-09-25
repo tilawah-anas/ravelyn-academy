@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students | Ravelyn Academy</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../js/sidebar/sidebar.css">
+    <link rel="stylesheet" href="../css/students.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+    <div class="app">
+        <!-- Sidebar 😭😭-->
+        <aside id="sidebar" data-base="./"></aside>
+        <!-- Main content -->
+        <main class="main-content">
+            <header class="page-header">
+                <div>
+                    <h1>Students</h1>
+                    <p>Manage students enrolled at Ravelyn Academy.</p>
+                </div>
+                <button class="btn btn-primary" id="openAddStudentBtn">
+                    <i class="fa-solid fa-plus"></i>
+                    Add Student
+                </button>
+            </header>
+            <!-- Stats -->
+            <section class="student-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div>
+                        <span>Total Students</span>
+                        <strong id="totalStudents">0</strong>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-user-check"></i>
+                    </div>
+                    <div>
+                        <span>Active</span>
+                        <strong id="activeStudents">0</strong>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <span>Graduated</span>
+                        <strong id="graduatedStudents">0</strong>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-user-slash"></i>
+                    </div>
+                    <div>
+                        <span>Inactive</span>
+                        <strong id="inactiveStudents">0</strong>
+                    </div>
+                </div>
+            </section>
+            <!-- Student table -->
+            <section class="content-card">
+                <div class="table-toolbar">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="search" id="studentSearch" placeholder="Search students...">
+                    </div>
+                    <select id="statusFilter">
+                        <option value="all">All Statuses</option>
+                        <option value="active">Active</option>
+                        <option value="graduated">Graduated</option>
+                        <option value="withdrawn">Withdrawn</option>
+                        <option value="expelled">Expelled</option>
+                    </select>
+                </div>
+                <div id="tableMessage" class="table-message hidden"></div>
+                <div class="table-wrapper">
+                    <table class="students-table">
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Student ID</th>
+                                <th>Gender</th>
+                                <th>Date of Birth</th>
+                                <th>Level</th>
+                                <th>Status</th>
+                                <th>Admission Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentsTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+    <!-- Add/Edit Student Modal -->
+    <div class="modal hidden" id="studentModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <div>
+                    <h2 id="modalTitle">Add Student</h2>
+                    <p id="modalDescription"> Add a new student to the academy. </p>
+                </div>
+                <button type="button" class="modal-close" id="closeStudentModal" > <i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="studentForm">
+                <input type="hidden" id="studentId">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="middleName">Middle Name</label>
+                        <input type="text" id="middleName" name="middleName">
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender">
+                            <option value="">Select gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateOfBirth">Date of Birth</label>
+                        <input type="date" id="dateOfBirth" name="dateOfBirth" required >
+                    </div>
+                    <div class="form-group">
+                        <label for="admissionDate">Admission Date</label>
+                        <input type="date" id="admissionDate" name="admissionDate" >
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="level">Level</label>
+                        <select id="level" name="level" required>
+                            <option value="">Select level</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="address">Address</label>
+                        <textarea id="address" name="address" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelStudentBtn"> Cancel </button>
+                    <button type="submit" class="btn btn-primary" id="saveStudentBtn" > Save Student </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Student Details Modal -->
+    <div class="modal hidden" id="detailsModal">
+        <div class="modal-overlay" id="detailsOverlay"></div>
+        <div class="modal-container details-container">
+            <div class="modal-header">
+                <div>
+                    <h2>Student Details</h2>
+                    <p>Student information</p>
+                </div>
+                <button type="button" class="modal-close" id="closeDetailsModal" >
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div id="studentDetails"></div>
+        </div>
+    </div>
+    <script type="module" src="js/authGuard.js"></script>
+    <script type="module" src="../js/sidebar/sidebar.js"></script>
+    <script type="module" src="../js/students.js"></script>
+</body>
+</html>

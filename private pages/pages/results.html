@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results | Ravelyn Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" >
+    <link rel="stylesheet" href="../css/main.css" >
+    <link rel="stylesheet" href="../js/sidebar/sidebar.css">
+    <link rel="stylesheet" href="../css/results.css" >
+</head>
+<body>
+    <aside id="sidebar" data-base="./"></aside>
+    <main class="main-content">
+        <header class="page-header">
+            <div>
+                <h1>Results</h1>
+                <p> Record and manage student academic results. </p>
+            </div>
+            <button class="btn btn-primary" id="openResultModal" >
+                <i class="fa-solid fa-plus"></i> Add Result
+            </button>
+        </header>
+
+        <!-- Stats -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-file-lines"></i>
+                </div>
+                <div>
+                    <span>Total Results</span>
+                    <strong id="totalResults">0</strong>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-1"></i>
+                </div>
+                <div>
+                    <span>First Term</span>
+                    <strong id="firstTermResults">0</strong>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-2"></i>
+                </div>
+                <div>
+                    <span>Second Term</span>
+                    <strong id="secondTermResults">0</strong>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-3"></i>
+                </div>
+                <div>
+                    <span>Third Term</span>
+                    <strong id="thirdTermResults">0</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filters -->
+        <section class="content-card">
+            <div class="filters">
+                <div class="search-box">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search student or course..." >
+                </div>
+                <select id="sessionFilter" class='filter-select'>
+                    <option value=""> All Sessions </option>
+                </select>
+                <select id="levelFilter" class='filter-select'>
+                    <option value=""> All Levels </option>
+                </select>
+                <select id="termFilter" class='filter-select'>
+                    <option value=""> All Terms </option>
+                </select>
+            </div>
+
+            <!-- Results table -->
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Course</th>
+                            <th>Session</th>
+                            <th>Term</th>
+                            <th>Score</th>
+                            <th>Remark</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultTableBody">
+                        <tr>
+                            <td colspan="7" class="loading-cell" > Loading results... </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="emptyState" class="empty-state hidden" >
+                <i class="fa-solid fa-file-circle-xmark"></i>
+                <h3>No results found</h3>
+                <p> No results match your current filters. </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Add Result Modal -->
+    <div class="modal-overlay hidden" id="resultModal" >
+        <div class="modal">
+            <div class="modal-header">
+                <div>
+                    <h2>Add Result</h2>
+                    <p> Record a student's result for the active term. </p>
+                </div>
+                <button class="modal-close" id="closeResultModal" >
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form id="resultForm">
+                <div class="form-grid">
+
+                    <!-- Student — user picks -->
+                    <div class="form-group full-width">
+                        <label for="student"> Student </label>
+                        <select id="student" required >
+                            <option value=""> Select student </option>
+                        </select>
+                    </div>
+
+                    <!-- Enrollment — derived from student, read-only -->
+                    <div class="form-group full-width">
+                        <label for="enrollmentDisplay"> Enrolment </label>
+                        <input
+                            type="text"
+                            id="enrollmentDisplay"
+                            readonly
+                            placeholder="Select a student first"
+                        >
+                        <small class="form-hint">
+                            Set automatically from the student's active enrolment.
+                        </small>
+                    </div>
+
+                    <!-- Course — filtered by enrolment's level -->
+                    <div class="form-group full-width">
+                        <label for="course"> Course </label>
+                        <select id="course" required disabled >
+                            <option value=""> Select student first </option>
+                        </select>
+                    </div>
+
+                    <!-- Score -->
+                    <div class="form-group">
+                        <label for="score"> Score </label>
+                        <input type="number" id="score" min="0" max="100" step="0.5" placeholder="Enter score" required >
+                    </div>
+
+                    <!-- Remarks -->
+                    <div class="form-group">
+                        <label for="remarks"> Remarks </label>
+                        <input type="text" id="remarks" placeholder="Optional" >
+                    </div>
+                </div>
+
+                <!-- Active term indicator -->
+                <div class="active-term-info" id="activeTermInfo" >
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span> The active academic term will be assigned automatically. </span>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelResult" > Cancel </button>
+                    <button type="submit" class="btn btn-primary" id="submitResult" > Save Result </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div class="modal-overlay hidden" id="deleteModal" >
+        <div class="modal modal-small">
+            <div class="delete-icon">
+                <i class="fa-solid fa-trash"></i>
+            </div>
+            <h2>Delete Result?</h2>
+            <p> This result will be permanently removed. This action cannot be undone! </p>
+            <div class="form-actions">
+                <button class="btn btn-secondary" id="cancelDelete" > Cancel </button>
+                <button class="btn btn-danger" id="confirmDelete" > Delete </button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="../js/sidebar/sidebar.js"></script>
+    <script type="module" src="../js/results.js" ></script>
+</body>
+</html>
